@@ -1,0 +1,17 @@
+Solr collection Backup&Restore Utility
+
+
+This project is a tool for backup solr collection to HDFS or restore solr collection data from HDFS
+Note: this tool only backup data of collection, not including solr collection structure.
+
+Author: Ji Chen
+
+Usage:
+
+Backup:
+
+spark-submit  --master local[6] --conf spark.driver.extraJavaOptions="-Djava.security.auth.login.config=/etc/ambari-infra-solr/conf/infra_solr_jaas.conf" --conf spark.executor.extraJavaOptions="-Djava.security.auth.login.config=/etc/ambari-infra-solr/conf/infra_solr_jaas.conf"  /tmp/solr.jar alinode1.openstacklocal.com:2181,alinode2.openstacklocal.com:2181,alinode3.openstacklocal.com:2181,alinode4.openstacklocal.com:2181/infra-solr  ranger_audits /tmp/solr_backup3 backup --splits-per-shard 18
+
+Restore:
+spark-submit  --master local[6] --conf spark.driver.extraJavaOptions="-Djava.security.auth.login.config=/etc/ambari-infra-solr/conf/infra_solr_jaas.conf" --conf spark.executor.extraJavaOptions="-Djava.security.auth.login.config=/etc/ambari-infra-solr/conf/infra_solr_jaas.conf"  /tmp/solr.jar alinode1.openstacklocal.com:2181,alinode2.openstacklocal.com:2181,alinode3.openstacklocal.com:2181,alinode4.openstacklocal.com:2181/infra-solr  ranger_audits /tmp/solr_backup3 restore
+
